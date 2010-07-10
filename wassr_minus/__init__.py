@@ -35,8 +35,13 @@ class WassrMinus(object):
         opener.addheaders = [('User-agent', 'Pyhon Wassr Client')]
         urllib.request.install_opener(opener)
 
-    def user_timeline(self, id):
-        return self.get_status(wassr_minus.api_uri.USER_TIMELINE + '?id=%s' % id)
+    def user_timeline(self, id=None):
+        if id != None:
+            uri = wassr_minus.api_uri.USER_TIMELINE + '?id=%s' % id
+        else:
+            uri = wassr_minus.api_uri.USER_TIMELINE
+
+        return self.get_status(uri)
 
     def friends_timeline(self):
         return self.get_status(wassr_minus.api_uri.FRIENDS_TIMELINE)
@@ -47,8 +52,13 @@ class WassrMinus(object):
     def replies(self):
         return self.get_status(wassr_minus.api_uri.REPLIES)
 
-    def show(self, id):
-        return self.get_status(wassr_minus.api_uri.SHOW + '?id=%s' % id)
+    def show(self, id=None):
+        if id != None:
+            uri = wassr_minus.api_uri.SHOW + '?id=%s' % id
+        else:
+            uri = wassr_minus.api_uri.SHOW
+
+        return self.get_status(uri)
 
     def get_status(self, uri):
         return json.loads(urllib.request.urlopen(uri).read().decode('utf8', 'ignore'))
