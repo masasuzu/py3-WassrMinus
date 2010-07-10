@@ -35,13 +35,8 @@ class WassrMinus(object):
         opener.addheaders = [('User-agent', 'Pyhon Wassr Client')]
         urllib.request.install_opener(opener)
 
-    def user_timeline(self, id=None):
-        if id != None:
-            uri = wassr_minus.api_uri.USER_TIMELINE + '?id=%s' % id
-        else:
-            uri = wassr_minus.api_uri.USER_TIMELINE
-
-        return self.get_status(uri)
+    def user_timeline(self, id):
+        return self.get_status(wassr_minus.api_uri.USER_TIMELINE + '?id=%s' % id)
 
     def friends_timeline(self):
         return self.get_status(wassr_minus.api_uri.FRIENDS_TIMELINE)
@@ -52,21 +47,13 @@ class WassrMinus(object):
     def replies(self):
         return self.get_status(wassr_minus.api_uri.REPLIES)
 
-    def show(self, id=None):
-        if id != None:
-            uri = wassr_minus.api_uri.SHOW + '?id=%s' % id
-        else:
-            uri = wassr_minus.api_uri.SHOW
-
-        return self.get_status(uri)
+    def show(self, id):
+        return self.get_status(wassr_minus.api_uri.SHOW + '?id=%s' % id)
 
     def get_status(self, uri):
         return json.loads(urllib.request.urlopen(uri).read().decode('utf8', 'ignore'))
 
-    def update(self, comment=None):
-        if comment == None:
-            raise Exception('not defined comment')
-
+    def update(self, comment):
         params = urllib.parse.urlencode({'source': self.source, 'status': comment})
         urllib.request.urlopen(wassr_minus.api_uri.UPDATE, params)
 
