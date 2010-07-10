@@ -16,13 +16,17 @@ Windows環境だとコンソールにprintする時に問題があるかも知�
 How to use
 -------------------------------
 
-   import wassr_minus
+    import wassr_minus
 
-   wassr = wassr_minus.WassrMinus(user='USER', password='PASS')
-   json_obj = wassr.public_timeline()
-   json_obj = wassr.friends_timeline()
-   json_obj = wassr.replies()
-   json_obj = wassr.user_timeline()   # or  wassr.user_timeline(id='USER')
-   json_obj = wassr.show()            # or  wassr.show(id='USER')
+    wassr = wassr_minus.WassrMinus(user='USER', password='PASS')
+    wassr.update('comment')
 
-   wassr.update('comment')
+    json_obj = wassr.public_timeline()
+    json_obj = wassr.friends_timeline()
+    json_obj = wassr.replies()
+    json_obj = wassr.user_timeline()   # or  wassr.user_timeline(id='USER')
+    json_obj = wassr.show()            # or  wassr.show(id='USER')
+
+    for status in json_obj:
+        print(status['login_user_id'])
+        print(status['html'])
