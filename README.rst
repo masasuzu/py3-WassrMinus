@@ -16,6 +16,7 @@ Windows環境だとコンソールにprintする時に問題があるかも知�
 How to use
 -------------------------------
 
+:
     import wassr_minus
 
     wassr = wassr_minus.WassrMinus(user='USER', password='PASS')
